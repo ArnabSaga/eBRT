@@ -356,128 +356,212 @@ body {
     box-shadow: 0 2px 5px rgba(42, 184, 143, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+/* ============ TABLET RESPONSIVENESS (768px - 992px) ============ */
+@media (max-width: 992px) and (min-width: 769px) {
     .app-container {
         flex-direction: column;
-        max-width: 800px;
-        min-height: unset;
+        max-width: 100%;
+        min-height: auto;
     }
-
+    
     .sidebar {
         width: 100%;
-        border-right: none;
-        border-bottom: 1px solid #EFEFEF;
-        padding: 20px;
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #EFEFEF;
     }
-
-    .logo {
-        margin-bottom: 0;
-        padding-left: 0;
+    
+    .logo img {
+        width: 120px;
     }
-
+    
     .sidebar-nav {
         flex-direction: row;
         gap: 15px;
-        width: auto;
     }
-
+    
     .nav-btn {
-        width: 100px;
-        padding: 12px 15px;
-        font-size: 0.9em;
+        width: 120px;
+        height: auto;
+        padding: 15px;
+        font-size: 16px;
+        margin: 0;
     }
-
-
-
+    
     .main-content {
         flex-direction: column;
         padding: 25px;
-        gap: 20px;
+        gap: 25px;
     }
-
+    
     .parameter-section {
         min-width: unset;
+        max-width: 100%;
         width: 100%;
-        /* max-width: 600px; */
     }
-
+    
     .action-btn {
         position: static;
         transform: none;
-        margin-top: 30px;
+        margin: 30px auto 15px;
         width: 80%;
         max-width: 300px;
-        align-self: center;
-        padding: 12px 30px;
+        display: block;
+        padding: 14px 30px;
     }
 }
 
+/* ============ MOBILE RESPONSIVENESS (up to 768px) ============ */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 0;
+        overflow: auto;
+        min-height: 100vh;
+        display: block;
     }
-
-    .sidebar {
+    
+    .app-container {
         flex-direction: column;
-        align-items: center;
-        padding: 15px;
+        max-width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        border-radius: 0;
     }
-
+    
+    .sidebar {
+        width: 100%;
+        flex-direction: column;
+        padding: 15px;
+        border-right: none;
+        border-bottom: 1px solid #EFEFEF;
+    }
+    
     .logo {
         margin-bottom: 20px;
     }
+    
+    .logo img {
+        width: 100px;
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .nav-btn {
+        width: 110px;
+        height: auto;
+        padding: 12px 10px;
+        font-size: 14px;
+        margin: 0;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .parameter-section {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .section-header {
+        padding: 14px 18px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.3em;
+    }
+    
+    .section-content {
+        padding: 20px;
+    }
+    
+    .field-group {
+        margin-bottom: 18px;
+    }
+    
+    .field-group label {
+        font-size: 0.9em;
+    }
+    
+    .number-input-environment, 
+    .number-input-vehicle {
+        padding: 9px 11px;
+        font-size: 0.95em;
+    }
+    
+    .action-btn {
+        position: static;
+        transform: none;
+        margin: 25px auto 15px;
+        width: 90%;
+        max-width: 280px;
+        display: block;
+        padding: 12px 25px;
+        font-size: 1.05em;
+    }
+    
+    .slider-labels {
+        font-size: 0.7em;
+    }
+}
 
+/* ============ SMALL MOBILE RESPONSIVENESS (up to 480px) ============ */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 12px;
+    }
+    
+    .logo img {
+        width: 90px;
+    }
+    
     .sidebar-nav {
         flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
-
+    
     .nav-btn {
-        width: 120px;
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
     }
-
+    
     .main-content {
         padding: 15px;
         gap: 15px;
     }
-
-    .section-header h2 {
-        font-size: 1.3em;
+    
+    .section-header {
+        padding: 12px 15px;
     }
-
-    .field-group label {
+    
+    .section-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .section-content {
+        padding: 15px;
+    }
+    
+    .number-input-environment, 
+    .number-input-vehicle {
+        padding: 8px 10px;
         font-size: 0.9em;
     }
-
-    .text-input,
-    .slider {
-        font-size: 0.95em;
-    }
-
+    
     .action-btn {
-        width: 90%;
+        width: 95%;
+        padding: 11px 20px;
         font-size: 1em;
-        padding: 10px 20px;
-        margin-top: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-main {
-        font-size: 28px;
-    }
-
-    .logo-geometric {
-        width: 25px;
-        height: 25px;
-    }
-
-    .nav-btn {
-        width: 100%;
     }
 }
