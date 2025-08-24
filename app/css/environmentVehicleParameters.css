@@ -163,8 +163,8 @@ body {
     font-size: 0.95em;
 }
 
-/* Text Inputs */
-.text-input {
+/* Number Inputs for Environment */
+.number-input-environment {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #2AB88F;
@@ -175,13 +175,89 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.text-input:focus {
+.number-input-environment:focus {
     outline: none;
     border-color: #2AB88F;
     box-shadow: 0 0 0 2px rgba(42, 184, 143, 0.2);
 }
 
-.text-input::placeholder {
+/* Validation States */
+.number-input-environment.valid {
+    border-color: #2AB88F !important;
+    box-shadow: 0 0 0 2px rgba(42, 184, 143, 0.2) !important;
+}
+
+.number-input-environment.invalid {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Number Inputs for Vehicle  */
+.number-input-vehicle {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #F4A63B;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.number-input-vehicle:focus {
+    outline: none;
+    border-color: #F4A63B;
+    box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2);
+}
+
+.number-input-vehicle:active {
+    border-color: #F4A63B;
+    box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2);
+}
+
+/* Validation States */
+.number-input-vehicle.valid {
+    border-color: #F4A63B !important;
+    box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2) !important;
+}
+
+.number-input-vehicle.invalid {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Error and Success Messages */
+.error-message {
+    color: #e74c3c;
+    font-size: 0.8em;
+    margin-top: 5px;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+.success-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2AB88F;
+    font-weight: bold;
+    font-size: 1.2em;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Field Group Positioning */
+.field-group {
+    position: relative;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.number-input::placeholder {
     color: #999;
 }
 
@@ -250,7 +326,7 @@ body {
 .action-btn {
     position: absolute;
     bottom: 15px;
-    left: 58%;
+    left: 57%;
     transform: translateX(-50%);
     background-color: #2AB88F;
     color: white;

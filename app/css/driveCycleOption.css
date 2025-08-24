@@ -493,7 +493,7 @@ label {
 }
 
 .bottom-button button {
-    background-color: #009688;
+    background-color: #2AB88F;
     color: white;
     font-size: 16px;
     padding: 16px 60px;
@@ -502,6 +502,15 @@ label {
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-button button:hover {
+    background-color: #249D7B;
+    box-shadow: 0 6px 15px rgba(42, 184, 143, 0.4);
+}
+
+.bottom-button button:active {
+    box-shadow: 0 2px 5px rgba(42, 184, 143, 0.2);
 }
 
 @media (max-width: 768px) {
