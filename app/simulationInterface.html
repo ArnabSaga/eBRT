@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBRT Simulation Interface</title>
+
+    <link rel="stylesheet" href="./css/simulationInterface.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="logo">
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn home-btn">
+                    <a href="#" style="color: white; text-decoration: none;">HOME</a>
+                </button>
+                <button class="nav-btn logout-btn">
+                    <a href="#" style="color: white; text-decoration: none;">LOG OUT</a>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="video-container">
+                <video src="./assets/vid/bus-vdo.mp4" muted loop autoplay></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar (Full Width) -->
+    <div class="bottom-bar">
+        <h3><strong>Simulation Running</strong>... Please Wait</h3>
+        <div class="progress-track">
+            <div class="progress-line"></div>
+            <div class="bus-icon">
+                <img src="./assets/img/bus-icon.png" alt="Bus Icon">
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/simulationInterface.js"></script>
+
+</body>
+
+</html>

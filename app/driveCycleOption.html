@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drive-Cycle-Option</title>
+
+  <link rel="stylesheet" href="./css/driveCycleOption.css" />
+</head>
+
+<body>
+  <!-- Container Start -->
+  <div class="container">
+    <!-- Sidebar Start -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="./assets/img/logo.png" alt="logo" />
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn home-btn">
+          <a href="#" style="color: white; text-decoration: none">HOME</a>
+        </button>
+        <button class="nav-btn logout-btn">
+          <a href="#" style="color: white; text-decoration: none">LOG OUT</a>
+        </button>
+      </nav>
+
+      <div class="black-space"></div>
+    </aside>
+    <!-- Sidebar End -->
+
+    <!-- Main Content Start -->
+    <div class="main">
+      <!-- Header Start -->
+      <div class="header">
+        <div class="title">DRIVE CYCLE OPTIONS</div>
+      </div>
+      <!-- Header End -->
+
+      <!-- Content Start -->
+      <div class="content">
+        <!-- Form Left Start -->
+        <div class="form-left">
+          <div class="form-group">
+            <label for="simTime">END SIMULATION TIME (S):</label>
+            <input type="number" id="simTime" required placeholder="600" min="1" step="1" />
+          </div>
+          <div class="form-group">
+            <label for="cycleTypeSelect">SELECT DRIVE CYCLE</label>
+            <select id="cycleTypeSelect" required>
+              <!-- <option value="">Select a cycle type</option> -->
+            </select>
+          </div>
+          <div class="mix-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="customDrive" />
+              <label for="customDrive">CUSTOM DRIVE CYCLE</label>
+            </div>
+            <div class="upload-buttons">
+              <button class="upload" onclick="uploadFile()">
+                UPLOAD DRIVE CYCLE
+              </button>
+              <button class="template" onclick="downloadTemplate()">
+                DOWNLOAD TEMPLATE
+              </button>
+            </div>
+            <div class="dropzone">Drag & Drop Here</div>
+          </div>
+        </div>
+        <!-- Form Left End -->
+
+        <!-- Form Right Start -->
+        <div class="form-right">
+          <img src="./assets/img/drive-cycle-option-wltc.png" alt="Drive Cycle Chart" />
+        </div>
+        <!-- Form Right End -->
+      </div>
+      <!-- Content End -->
+
+      <!-- Bottom Button Start -->
+      <div class="bottom-button">
+        <button onclick="submitForm()">SELECT PARAMETERS</button>
+      </div>
+      <!-- Bottom Button End -->
+    </div>
+    <!-- Main Content End -->
+  </div>
+  <!-- Container End -->
+
+  <script src="./js/driveCycleOption.js"></script>
+</body>
+
+</html>

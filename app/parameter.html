@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBRT 2030 Simulation</title>
+
+    <link rel="stylesheet" href="./css/parameter.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="logo">
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn home-btn">
+                    <a href="#" style="color: white; text-decoration: none;">HOME</a>
+                </button>
+                <button class="nav-btn logout-btn">
+                    <a href="#" style="color: white; text-decoration: none;">LOG OUT</a>
+                </button>
+            </nav>
+            <!-- Run Simulation Button -->
+            <div class="simulation-btn-container">
+                <button class="simulation-btn" data-testid="button-run-simulation">RUN SIMULATION</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Motor Section -->
+            <div class="section motor-section">
+                <!-- Motor Type Dropdown -->
+                <div class="dropdown-container">
+                    <label class="dropdown-label">MOTOR TYPE</label>
+                    <div class="dropdown-wrapper">
+                        <select class="dropdown" data-testid="select-motor-type">
+                            <option>Permanent Magnet Synchronous Motor</option>
+                        </select>
+                        <div class="dropdown-arrow">▼</div>
+                    </div>
+                </div>
+
+                <!-- Motor Parameters Table -->
+                <div class="parameters-table">
+                    <div class="table-headers">
+                        <div class="table-header">PARAMETER</div>
+                        <div class="table-header">VALUE</div>
+                    </div>
+                    <div class="table-body">
+                        <div class="table-cell"></div>
+                        <div class="table-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Motor Section Header -->
+                <div class="section-header-container">
+                    <div class="section-header motor-header">MOTOR</div>
+                </div>
+            </div>
+
+            <!-- Battery Section -->
+            <div class="section battery-section">
+                <!-- Battery Type Dropdown -->
+                <div class="dropdown-container">
+                    <label class="dropdown-label battery-label">Battery Type</label>
+                    <div class="dropdown-wrapper">
+                        <select class="dropdown" data-testid="select-battery-type">
+                            <option>Lithium Phosphate Iron</option>
+                        </select>
+                        <div class="dropdown-arrow">▼</div>
+                    </div>
+                </div>
+
+                <!-- Battery Parameters Table -->
+                <div class="parameters-table">
+                    <div class="table-headers">
+                        <div class="table-header">Parameter</div>
+                        <div class="table-header">Value</div>
+                    </div>
+                    <div class="table-body">
+                        <div class="table-cell"></div>
+                        <div class="table-cell"></div>
+                    </div>
+                </div>
+
+                <!-- Battery Section Header -->
+                <div class="section-header-container">
+                    <div class="section-header battery-header">BATTERY</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/parameter.js"></script>
+</body>
+
+</html>

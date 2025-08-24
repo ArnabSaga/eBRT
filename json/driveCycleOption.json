@@ -1,0 +1,113 @@
+{
+    "configuration": {
+      "Driving_Cycle": {
+        "City_Name": {
+          "user_input": {
+            "type": "Click on the World Map",
+            "options": [
+              {"label": "Amsterdam", "value": 1},
+              {"label": "Athens", "value": 2},
+              {"label": "Barcelona", "value": 3},
+              {"label": "Prague", "value": 4},
+              {"label": "Rimini", "value": 5},
+              {"label": "Eindhoven", "value": 6}
+            ]
+          },
+          "back_end_value": "Constant"
+        },
+        "Month": {
+          "user_input": {
+            "type": "Dropdown Menu",
+            "options": [
+              {"label": "January", "value": 1},
+              {"label": "February", "value": 2},
+              {"label": "March", "value": 3},
+              {"label": "April", "value": 4},
+              {"label": "May", "value": 5},
+              {"label": "June", "value": 6},
+              {"label": "July", "value": 7},
+              {"label": "August", "value": 8},
+              {"label": "September", "value": 9},
+              {"label": "October", "value": 10},
+              {"label": "November", "value": 11},
+              {"label": "December", "value": 12}
+            ]
+          },
+          "back_end_value": "Constant"
+        },
+        "ECO_Options": {
+          "user_input": {
+            "type": "Radio Buttons",
+            "options": [
+              {"label": "No ECO features", "value": 0},
+              {"label": "ECO features", "value": 1},
+              {"label": "ECO_Threshold", "value": null},
+              {"label": "User Input", "value": null},
+              {"label": "Slider (10% ~ 25%)", "value": "Constant"}
+            ]
+          },
+          "back_end_value": "Constant",
+          "note": "Add this field to the website. Important."
+        },
+        "Cycle_Type": {
+          "user_input": {
+            "type": "Dropdown Menu",
+            "options": [
+              {"label": "City_Name Specific", "value": 0},
+              {"label": "WLTC", "value": 1},
+              {"label": "NEDC", "value": 2},
+              {"label": "SORT", "value": 3},
+              {"label": "VECTO", "value": 4},
+              {"label": "FTP", "value": 5},
+              {"label": "Custom", "value": 6}
+            ]
+          },
+          "back_end_value": "Constant"
+        },
+        "Time": {
+          "user_input": "Array (if Cycle_Type == 0 or 6)",
+          "back_end_value": {
+            "conditional": {
+              "if_Cycle_Type_0_or_6": "Array",
+              "else": 0
+            }
+          }
+        },
+        "Speed": {
+          "user_input": "Array (if Cycle_Type == 0 or 6)",
+          "back_end_value": {
+            "conditional": {
+              "if_Cycle_Type_0_or_6": "Array",
+              "else": 0
+            }
+          }
+        },
+        "Altitude": {
+          "user_input": "Array or 0",
+          "back_end_value": "Array or 0",
+          "notes": [
+            "If Altitude is not provided, then send 0 instead of an array, and back-end will assume a flat road, i.e., no slope.",
+            "For city specific, altitude is known already and does not need to be sent.",
+            "If user chooses any of the standard driving cycles (WLTP, NEDC, SORT, VECTO, or FTP) then the Altitude is assumed to be 0."
+          ]
+        }
+      },
+      "Scenario_data": {
+        "Return_Trip_Distance": {
+          "user_input": "Not shown in webpage",
+          "back_end_value": "Constant",
+          "visibility": "Only appears if user selects standard driving cycle"
+        },
+        "Number_of_Buses_in_Fleet": {
+          "user_input": "Not shown in webpage",
+          "back_end_value": "Constant",
+          "visibility": "Only appears if user selects standard driving cycle"
+        },
+        "Average_Velocity_of_Route": {
+          "user_input": "Not shown in webpage",
+          "back_end_value": "Constant",
+          "visibility": "Only appears if user selects standard driving cycle"
+        }
+      }
+    }
+  } 

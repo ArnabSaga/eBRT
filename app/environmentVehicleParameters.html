@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBRT 2030 Dashboard</title>
+
+    <link rel="stylesheet" href="./css/environmentVehicleParameters.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="logo" />
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn home-btn">
+                    <a href="#" style="color: white; text-decoration: none">HOME</a>
+                </button>
+                <button class="nav-btn logout-btn">
+                    <a href="#" style="color: white; text-decoration: none">LOG OUT</a>
+                </button>
+            </nav>
+
+            <div class="black-space"></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Environment Parameters Section -->
+            <section class="parameter-section environment-section">
+                <div class="section-header">
+                    <h2>Environment Parameters</h2>
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="solar-insolation">Average Solar Insolation (W/m²)</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="solar-insolation" min="0" max="10" value="0" class="slider">
+                            <div class="slider-labels">
+                                <span>0</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="wind-speed">Average Wind Speed (m/s)</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="wind-speed" min="0" max="100" value="65" class="slider">
+                            <div class="slider-labels">
+                                <span>0</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="humidity">Average Humidity (%)</label>
+                        <input type="number" id="humidity" class="text-input" placeholder="Enter humidity">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="temperature">Average Temperature (°C)</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="temperature" min="0" max="100" value="60" class="slider">
+                            <div class="slider-labels">
+                                <span>-5</span><span>0</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>35</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="daylight">Duration of Daylight (hr)</label>
+                        <input type="text" id="daylight" class="text-input" placeholder="Enter hours">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="pressure">Atmospheric Pressure (atm)</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="pressure" min="0" max="100" value="60" class="slider">
+                            <div class="slider-labels">
+                                <span>0</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vehicle Parameters Section -->
+            <section class="parameter-section vehicle-section">
+                <div class="section-header">
+                    <h2>Vehicle Parameters</h2>
+                </div>
+                <div class="section-content">
+                    <div class="field-group">
+                        <label for="rolling-resistance">Rolling Resistance Coefficient</label>
+                        <input type="text" id="rolling-resistance" class="text-input" placeholder="Enter coefficient">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="wheel-radius">Wheel Radius (m)</label>
+                        <input type="text" id="wheel-radius" class="text-input" placeholder="Enter radius">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="cross-section">Cross Selection Area (m²)</label>
+                        <input type="text" id="cross-section" class="text-input" placeholder="Enter area">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="vehicle-mass">Vehicle Mass (kg)</label>
+                        <input type="text" id="vehicle-mass" class="text-input" placeholder="Enter mass">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="drag-coefficient">Aerodynamic Drag Coefficient</label>
+                        <input type="text" id="drag-coefficient" class="text-input" placeholder="Enter coefficient">
+                    </div>
+
+                    <div class="field-group">
+                        <label for="battery-soc">Initial Battery SOC (%)</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="battery-soc" min="0" max="100" value="65"
+                                class="slider battery-slider">
+                            <div class="slider-labels">
+                                <span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="">
+        <button class="action-btn next-btn" id="nextButton">NEXT</button>
+    </div>
+
+    <script>
+        // App Configuration
+        const appConfig = {
+            appTitle: "eBRT 2030",
+            sections: [
+                {
+                    title: "Environment Parameters",
+                    color: "#2AB88F",
+                    fields: [
+                        {
+                            label: "Average Solar Insolation (W/m²)",
+                            type: "range",
+                            min: 0,
+                            max: 100,
+                            value: 65
+                        },
+                        {
+                            label: "Average Wind Speed (m/s)",
+                            type: "range",
+                            min: 0,
+                            max: 100,
+                            value: 65
+                        },
+                        {
+                            label: "Average Humidity (%)",
+                            type: "text",
+                            placeholder: "Enter humidity"
+                        },
+                        {
+                            label: "Average Temperature (°C)",
+                            type: "range",
+                            min: 0,
+                            max: 100,
+                            value: 60
+                        },
+                        {
+                            label: "Duration of Daylight (hr)",
+                            type: "text",
+                            placeholder: "Enter hours"
+                        },
+                        {
+                            label: "Atmospheric Pressure (atm)",
+                            type: "range",
+                            min: 0,
+                            max: 100,
+                            value: 60
+                        }
+                    ]
+                },
+                {
+                    title: "Vehicle Parameters",
+                    color: "#F7931E",
+                    fields: [
+                        {
+                            label: "Rolling Resistance Coefficient",
+                            type: "text",
+                            placeholder: "Enter coefficient"
+                        },
+                        {
+                            label: "Wheel Radius (m)",
+                            type: "text",
+                            placeholder: "Enter radius"
+                        },
+                        {
+                            label: "Cross Selection Area (m²)",
+                            type: "text",
+                            placeholder: "Enter area"
+                        },
+                        {
+                            label: "Vehicle Mass (kg)",
+                            type: "text",
+                            placeholder: "Enter mass"
+                        },
+                        {
+                            label: "Aerodynamic Drag Coefficient",
+                            type: "text",
+                            placeholder: "Enter coefficient"
+                        },
+                        {
+                            label: "Initial Battery SOC (%)",
+                            type: "range",
+                            min: 0,
+                            max: 100,
+                            value: 65
+                        }
+                    ]
+                }
+            ],
+            buttons: [
+                {
+                    label: "NEXT",
+                    action: "next",
+                    style: "primary"
+                }
+            ],
+            sidebar: {
+                logo: "eBRT 2030",
+                items: [
+                    {
+                        label: "HOME",
+                        action: "home"
+                    },
+                    {
+                        label: "LOG OUT",
+                        action: "logout",
+                        style: "warning"
+                    }
+                ]
+            }
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            initializeSliders();
+            initializeFormInteractions();
+            initializeButtonInteractions();
+            setupKeyboardNavigation();
+        }
+
+        function initializeSliders() {
+            const sliders = document.querySelectorAll('.slider');
+
+            sliders.forEach(slider => {
+                // Create value display
+                const valueDisplay = createValueDisplay(slider);
+
+                // Update slider background based on value
+                updateSliderBackground(slider);
+
+                // Add event listeners
+                slider.addEventListener('input', function () {
+                    updateSliderBackground(this);
+                    updateValueDisplay(valueDisplay, this.value);
+                });
+
+                slider.addEventListener('blur', function () {
+                    setTimeout(() => {
+                        valueDisplay.style.opacity = '0';
+                    }, 1000);
+                });
+            });
+        }
+
+        function createValueDisplay(slider) {
+            const display = document.createElement('div');
+            display.className = 'slider-value';
+            display.textContent = slider.value;
+            display.style.cssText = `
+                position: absolute;
+                top: -25px;
+                right: 0;
+                background: #2AB88F;
+                color: white;
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                font-weight: 500;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                pointer-events: none;
+                z-index: 10;
+            `;
+
+            const container = slider.closest('.slider-wrapper');
+            container.style.position = 'relative';
+            container.appendChild(display);
+
+            return display;
+        }
+
+        function updateSliderBackground(slider) {
+            const value = slider.value;
+            const percentage = (value / 100) * 100;
+
+            if (slider.classList.contains('battery-slider')) {
+                slider.style.background = `linear-gradient(to right, #F7931E 0%, #F7931E ${percentage}%, #DDDDDD ${percentage}%, #DDDDDD 100%)`;
+            } else {
+                slider.style.background = `linear-gradient(to right, #F7931E 0%, #F7931E ${percentage}%, #DDDDDD ${percentage}%, #DDDDDD 100%)`;
+            }
+        }
+
+        function updateValueDisplay(display, value) {
+            display.textContent = value;
+            display.style.opacity = '1';
+        }
+
+        function initializeFormInteractions() {
+            const textInputs = document.querySelectorAll('.text-input');
+
+            textInputs.forEach(input => {
+                input.addEventListener('focus', function () {
+                    this.style.borderColor = '#2AB88F';
+                    this.style.boxShadow = '0 0 0 2px rgba(42, 184, 143, 0.2)';
+                });
+
+                input.addEventListener('blur', function () {
+                    this.style.borderColor = '#2AB88F';
+                    this.style.boxShadow = 'none';
+                });
+
+                input.addEventListener('input', function () {
+                    console.log(`${this.id}: ${this.value}`);
+                });
+            });
+        }
+
+        function initializeButtonInteractions() {
+            // Action button
+            const actionBtn = document.querySelector('.action-btn');
+            actionBtn.addEventListener('click', handleActionButton);
+
+            // Navigation buttons
+            const homeBtn = document.querySelector('.home-btn');
+            const logoutBtn = document.querySelector('.logout-btn');
+
+            homeBtn.addEventListener('click', handleHomeButton);
+            logoutBtn.addEventListener('click', handleLogoutButton);
+        }
+
+        function handleActionButton() {
+            if (validateForm()) {
+                // Redirect to parameter.html if form is valid
+                window.location.href = 'parameter.html';
+            }
+        }
+
+        function handleHomeButton() {
+            showNotification('Navigating to Home...', 'info');
+        }
+
+        function handleLogoutButton() {
+            showNotification('Logging out...', 'info');
+        }
+
+        function collectFormData() {
+            const data = {};
+
+            // Collect slider values
+            const sliders = document.querySelectorAll('.slider');
+            sliders.forEach(slider => {
+                data[slider.id] = slider.value;
+            });
+
+            // Collect text input values
+            const textInputs = document.querySelectorAll('.text-input');
+            textInputs.forEach(input => {
+                data[input.id] = input.value;
+            });
+
+            return data;
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => {
+                notification.remove();
+            });
+
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 1000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                font-family: 'Roboto', sans-serif;
+            `;
+
+            // Set background color based on type
+            switch (type) {
+                case 'success':
+                    notification.style.backgroundColor = '#2AB88F';
+                    break;
+                case 'error':
+                    notification.style.backgroundColor = '#e74c3c';
+                    break;
+                default:
+                    notification.style.backgroundColor = '#3498db';
+            }
+
+            // Add to page
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' && event.target.tagName === 'INPUT') {
+                    const nextInput = event.target.parentElement.nextElementSibling?.querySelector('input');
+                    if (nextInput) {
+                        nextInput.focus();
+                    } else {
+                        document.querySelector('.action-btn').click();
+                    }
+                }
+            });
+        }
+
+        // Form validation
+        function validateForm() {
+            const textInputs = document.querySelectorAll('.text-input');
+            let isValid = true;
+            let emptyFields = [];
+
+            textInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    const fieldName = input.id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    emptyFields.push(fieldName);
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                showNotification(`Please fill in: ${emptyFields.join(', ')}`, 'error');
+            }
+
+            return isValid;
+        }
+    </script>
+    <script src="./js/environmentVehicleParameters.js"></script>
+</body>
+
+</html>

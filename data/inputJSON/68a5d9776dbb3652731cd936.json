@@ -1,0 +1,36 @@
+{
+  "userId": null,
+  "inputData": {
+    "simulationConfig": {
+      "configuration": {
+        "Driving_Cycle": {
+          "Cycle_Type": 2,
+          "City_Name": "Amsterdam",
+          "City_Id": 1,
+          "Month": 1,
+          "ECO_Options": 0
+        }
+      }
+    },
+    "environmentVehicleParams": {
+      "solar-insolation": "65",
+      "wind-speed": "65",
+      "temperature": "60",
+      "pressure": "60",
+      "battery-soc": "65",
+      "humidity": "10",
+      "daylight": "10",
+      "rolling-resistance": "10",
+      "wheel-radius": "10",
+      "cross-section": "10",
+      "vehicle-mass": "10",
+      "drag-coefficient": "10"
+    },
+    "selections": {
+      "motorType": "Permanent Magnet Synchronous Motor",
+      "batteryType": "Lithium Phosphate Iron"
+    }
+  },
+  "timestamp": "2025-08-20T14:19:35.436Z",
+  "version": "1.0.0"
+}
