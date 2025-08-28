@@ -18,8 +18,9 @@ A secure, production-ready backend system for the eBRT 2030 simulation applicati
 ### Prerequisites
 
 1. **Node.js** (v16 or higher)
-2. **MongoDB** (v4.4 or higher)
+2. **MongoDB** (v4.4 or higher) - *Optional for development*
 3. **npm** or **yarn**
+4. **Two available ports**: 4000 (backend) and 5001 (validator)
 
 ### Installation
 
@@ -34,18 +35,21 @@ A secure, production-ready backend system for the eBRT 2030 simulation applicati
    # Edit .env with your configuration
    ```
 
-3. **Start the server:**
+3. **Start the services:**
    ```bash
-   # Development mode with auto-restart
-   npm run dev
-   
-   # Production mode
+   # Terminal 1: Start the main backend
    npm start
+   
+   # Terminal 2: Start the validator (required for full functionality)
+   node validator-example.js
    ```
 
 4. **Access the application:**
    - Frontend: `http://localhost:4000/`
    - Health Check: `http://localhost:4000/api/health`
+   - Validator Health: `http://localhost:5001/health`
+
+**Important**: Both services must be running for the complete simulation flow to work!
 
 ## 🔧 Environment Configuration
 
@@ -55,6 +59,7 @@ A secure, production-ready backend system for the eBRT 2030 simulation applicati
 |----------|-------------|---------|
 | `MONGODB_URI` | MongoDB connection string | `mongodb://127.0.0.1:27017/ebrt` |
 | `VALIDATOR_URL` | External validator endpoint | `http://localhost:5001/validate` |
+| `SHARED_SECRET` | HMAC signing secret for backend communication | *Must be set* |
 
 ### Optional Variables
 
@@ -88,6 +93,40 @@ A secure, production-ready backend system for the eBRT 2030 simulation applicati
   ```
 
 - **GET** `/api/results/:id` - Get simulation results
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### 1. "Spec file not found" Error
+- Ensure `SPEC_PATH` in `.env` points to `./json/driveCycleOption.json`
+- Check that the file exists and contains `backend_payload_template`
+
+#### 2. MongoDB Connection Failed
+- **Development**: Server will start with warnings, but database operations will fail
+- **Production**: Ensure MongoDB is running and accessible
+- Check connection string in `MONGODB_URI`
+
+#### 3. Validator Connection Failed
+- Ensure validator service is running on port 5001
+- Check `VALIDATOR_URL` in `.env`
+- Verify both services use the same `SHARED_SECRET`
+
+#### 4. Port Already in Use
+- Check if services are already running: `netstat -ano | findstr :4000`
+- Kill existing processes or change ports in `.env`
+
+### Service Status Check
+```bash
+# Check backend health
+curl http://localhost:4000/api/health
+
+# Check validator health  
+curl http://localhost:5001/health
+
+# Check MongoDB (if running)
+mongosh --eval "db.runCommand('ping')"
+```
 
 ## 🔄 Frontend Flow
 

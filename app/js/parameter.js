@@ -206,7 +206,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             const data = await resp.json();
             if (data && data.id) {
                 try { sessionStorage.setItem('lastSimulationId', data.id); } catch { }
-                window.location.href = 'simulationInterface.html?id=' + encodeURIComponent(data.id);
+                
+                // Show success message and redirect to output page
+                showNotification('Simulation started successfully! Redirecting to results...', 'success');
+                
+                // Wait a moment for user to see the message, then redirect
+                setTimeout(() => {
+                    window.location.href = 'simulationOutput.html?id=' + encodeURIComponent(data.id);
+                }, 1500);
             } else {
                 throw new Error('Invalid response from server');
             }

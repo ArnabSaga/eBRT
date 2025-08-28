@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalTime =
         Number(document.body?.dataset?.progressMs) > 0
             ? Number(document.body.dataset.progressMs)
-            :  60 * 1000; // 10 minutes in ms
+            : 10 * 60 * 1000; // 10 minutes in ms
 
     let startTime = performance.now();
     let serverProgress = 0;      // 0..1 from backend if available
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 // Success conditions: validatedResponse present OR status indicates completion
-                if (data?.validatedResponse || data?.status === 'done' || data?.status === 'ready' || data?.status === 'completed') {
+                if (data?.validatedResponse || ['completed', 'ready', 'success'].includes(String(data?.status || ''))) {
                     // Fill the bar to 100% visually before leaving
                     applyProgress(1);
                     window.location.href = 'simulationOutput.html?id=' + encodeURIComponent(simId);

@@ -1,0 +1,21 @@
+{
+  "name": "ebrt-validator-example",
+  "version": "1.0.0",
+  "description": "Example validator backend for eBRT simulation system",
+  "main": "validator-example.js",
+  "scripts": {
+    "start": "node validator-example.js",
+    "dev": "nodemon validator-example.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "keywords": ["ebrt", "validator", "simulation", "backend"],
+  "author": "eBRT Team",
+  "license": "MIT"
+}
