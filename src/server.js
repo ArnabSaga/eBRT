@@ -5,7 +5,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const axios = require('axios');
-const axiosRetry = require('axios-retry');
+const axiosRetry = require('axios-retry').default;
+const { exponentialDelay } = require('axios-retry');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
@@ -41,9 +42,9 @@ const config = {
 validateEnvironment();
 
 /* ========= Configure Axios with Retries ========= */
-axiosRetry(axios, { 
-    retries: config.MAX_RETRIES, 
-    retryDelay: axiosRetry.exponentialDelay, 
+axiosRetry(axios, {
+    retries: config.MAX_RETRIES,
+    retryDelay: exponentialDelay,
     retryCondition: (error) => {
         // Retry on network errors or 5xx responses
         return !error.response || (error.response.status >= 500 && error.response.status < 600);
