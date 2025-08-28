@@ -1,14 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>simulation-output</title>
 
-    <link rel="stylesheet" href="./css/simulationOutput.css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eBRT Simulation Dashboard</title>
+    <link rel="stylesheet" href="./css/simulationOutput.css" />
+    <!-- ECharts (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 </head>
+
 <body>
-    
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="logo">
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- (Tip: use <a> directly for valid HTML; kept your structure working anyway) -->
+                <button class="nav-btn home-btn"><a href="#">HOME</a></button>
+                <button class="nav-btn logout-btn"><a href="#">LOG OUT</a></button>
+            </nav>
+
+            <div class="blank"></div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Simulation OUTPUT</h1>
+            </div>
+
+            <div class="content">
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Stacked Charts Container -->
+                    <div class="charts-container">
+                        <!-- Speed Chart -->
+                        <div class="chart-box speed-chart">
+                            <div class="chart-header">Speed (km/h)</div>
+                            <div id="speedChart" class="chart"></div>
+                            <!-- kept (unused now) -->
+                            <div class="marker-popup" id="speedMarkerPopup">
+                                <div class="popup-time">2024-09-07 14:01:35</div>
+                                <div class="popup-value">AVG_speedkmh 76.5</div>
+                                <div class="popup-legend">
+                                    <div class="legend-line blue"></div>
+                                    <span>AVG_speedkmh</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message Chart -->
+                        <div class="chart-box message-chart">
+                            <div class="chart-header">Message: CAN1_OBD2_S_M41_S01PID_MOD | Signal: All</div>
+                            <div id="messageChart" class="chart"></div>
+                            <div class="chart-legend">
+                                <div class="legend-line green"></div>
+                                <span>AVG_s01pid0d_vehiclespeed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="metrics">
+                        <!-- Row 1: Fuel Rate + three gauges (¼ each) -->
+                        <div class="row gauges-row">
+                            <div class="metric fuel-rate">
+                                <div class="label">Fuel Rate</div>
+                                <div class="fuel-display">
+                                    <span class="value">2</span><span class="unit">L/h</span>
+                                </div>
+                                <div class="fuel-mini-chart">
+                                    <div id="fuelMiniChart" class="mini-chart"></div>
+                                </div>
+                            </div>
+
+                            <div class="metric gauge">
+                                <div class="label">Fuel (%)</div>
+                                <div class="gauge-container">
+                                    <canvas id="fuelGauge" width="60" height="60"></canvas>
+                                    <div class="gauge-value orange">32</div>
+                                </div>
+                            </div>
+
+                            <div class="metric gauge">
+                                <div class="label">Load (%)</div>
+                                <div class="gauge-container">
+                                    <canvas id="loadGauge" width="60" height="60"></canvas>
+                                    <div class="gauge-value blue">22</div>
+                                </div>
+                            </div>
+
+                            <div class="metric gauge">
+                                <div class="label">Torque (%)</div>
+                                <div class="gauge-container">
+                                    <canvas id="torqueGauge" width="60" height="60"></canvas>
+                                    <div class="gauge-value blue">16</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: DTC + three temps (¼ each) -->
+                        <div class="row temps-row">
+                            <div class="metric dtc">
+                                <div class="label">DTCs (#)</div>
+                                <div class="dtc-value">6</div>
+                            </div>
+
+                            <div class="metric temp-gauge">
+                                <div class="label">Coolant °C</div>
+                                <div class="gauge-container small">
+                                    <canvas id="coolantGauge" width="35" height="35"></canvas>
+                                    <div class="gauge-value small green">76.1</div>
+                                </div>
+                            </div>
+
+                            <div class="metric temp-gauge">
+                                <div class="label">Intake °C</div>
+                                <div class="gauge-container small">
+                                    <canvas id="intakeGauge" width="35" height="35"></canvas>
+                                    <div class="gauge-value small green">28.9</div>
+                                </div>
+                            </div>
+
+                            <div class="metric temp-gauge">
+                                <div class="label">Ambi. °C</div>
+                                <div class="gauge-container small">
+                                    <canvas id="ambientGauge" width="35" height="35"></canvas>
+                                    <div class="gauge-value small blue">19.7</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Performance (⅓ each, full-width row) -->
+                        <div class="row performance-row">
+                            <div class="metric performance green">
+                                <div class="perf-label">Speed</div>
+                                <div class="perf-value">54</div>
+                                <div class="perf-unit">km/h</div>
+                            </div>
+
+                            <div class="metric performance blue">
+                                <div class="perf-label">Distance</div>
+                                <div class="perf-value">28</div>
+                                <div class="perf-unit">km</div>
+                            </div>
+
+                            <div class="metric performance blue rpm">
+                                <div class="perf-label">RPM</div>
+                                <div class="perf-value">1128</div>
+                                <div id="rpmChart" class="mini-chart"></div>
+                            </div>
+                        </div>
+
+                        <div class="resimulate">To Re Simulate, Goto Home Page</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">
+            <img src="./assets/img/logo.png" alt="footer-logo">
+        </div>
+        <div class="country">
+            <img src="./assets/img/country.png" alt="country-logo">
+        </div>
+        <div class="resarch-group">
+            <img src="./assets/img/resarch.png" alt="resarch-group-logo">
+        </div>
+    </div>
+
     <script src="./js/simulationOutput.js"></script>
 </body>
+
 </html>

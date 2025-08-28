@@ -1,0 +1,45 @@
+{
+  "userId": null,
+  "inputData": {
+    "simulationConfig": {
+      "configuration": {
+        "Driving_Cycle": {
+          "Cycle_Type": 0,
+          "City_Name": null,
+          "City_Id": null,
+          "Month": null,
+          "ECO_Options": 0
+        }
+      }
+    },
+    "environmentVehicleParams": {
+      "Environment_data": {
+        "WindSpeed_ms": 0,
+        "Humidity_pct": 0,
+        "AvgTemp_C": 0,
+        "Solar_Irradiance_Wh_m2": 0,
+        "CabinTempRef_C": 20,
+        "AuxiliarySystemVoltage_V": 24,
+        "AuxiliarySystemTotalPower_kW": 2
+      },
+      "Vehicle_data": {
+        "VehicleMass_kg": 12000,
+        "VehicleWidth_m": 2.5,
+        "VehicleHeight_m": 3.2,
+        "WheelRadius_m": 0.51,
+        "AirDragCoeff": 0.65,
+        "RollResist": 0.008,
+        "MaxPassenger": 70,
+        "VehMaxSpeed_kph": 90
+      }
+    },
+    "selections": {
+      "motorTypeId": 1,
+      "motorTypeLabel": "Induction Motor",
+      "batteryTypeId": 1,
+      "batteryTypeLabel": "NMC Battery"
+    }
+  },
+  "timestamp": "2025-08-28T03:15:17.826Z",
+  "version": "1.0.0"
+}

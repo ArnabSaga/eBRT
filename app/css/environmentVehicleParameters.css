@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -19,25 +18,20 @@ body {
 .app-container {
     display: flex;
     width: 100%;
-    /* max-width: 1300px; */
     background: white;
-    /* border-radius: 8px; */
-    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); */
     overflow: hidden;
     position: relative;
-    /* min-height: 700px; */
 }
 
 /* Sidebar */
 .sidebar {
-    width: 240px;
+    width: 18dv2;
     background: white;
     padding: 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* border-right: 1px solid #EFEFEF; */
 }
 
 /* Logo */
@@ -55,12 +49,12 @@ body {
 }
 
 .nav-btn {
-    width: 20dvh;
-    height: 20dvh;
+    width: 22dvh;
+    height: 18dvh;
     padding: 18px 20px;
     border: none;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 25px;
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -69,21 +63,53 @@ body {
 }
 
 .home-btn {
-    background-color: #2AB88F;
+    background-color: #01A79D;
+    border: none;
+    /* padding: 10px 20px; */
+    cursor: pointer;
+    transition: all 0.5s ease; 
 }
 
 .home-btn:hover {
-    background-color: #249D7B;
+    background-color: white;
+    border: 2px solid #01A79D;
     transform: translateY(-2px);
+}
+
+.home-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.home-btn:hover a {
+    color: #01A79D;
 }
 
 .logout-btn {
-    background-color: #F7931E;
+    background-color: #FBB040;
+    border: none;
+    /* padding: 10px 20px; */
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
 
 .logout-btn:hover {
-    background-color: #D17C1A;
+    background-color: white;
+    border: 2px solid #FBB040;
     transform: translateY(-2px);
+}
+
+.logout-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.logout-btn:hover a {
+    color: #FBB040;
 }
 
 /* Main Content */
@@ -167,7 +193,7 @@ body {
 .number-input-environment {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #2AB88F;
+    border: 1px solid #01A79D;
     border-radius: 5px;
     font-size: 1em;
     background-color: white;
@@ -177,13 +203,13 @@ body {
 
 .number-input-environment:focus {
     outline: none;
-    border-color: #2AB88F;
+    border-color: #01A79D;
     box-shadow: 0 0 0 2px rgba(42, 184, 143, 0.2);
 }
 
 /* Validation States */
 .number-input-environment.valid {
-    border-color: #2AB88F !important;
+    border-color: #01A79D !important;
     box-shadow: 0 0 0 2px rgba(42, 184, 143, 0.2) !important;
 }
 
@@ -196,7 +222,7 @@ body {
 .number-input-vehicle {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #F4A63B;
+    border: 1px solid #f4a63b;
     border-radius: 5px;
     font-size: 1em;
     background-color: white;
@@ -206,18 +232,18 @@ body {
 
 .number-input-vehicle:focus {
     outline: none;
-    border-color: #F4A63B;
+    border-color: #f4a63b;
     box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2);
 }
 
 .number-input-vehicle:active {
-    border-color: #F4A63B;
+    border-color: #f4a63b;
     box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2);
 }
 
 /* Validation States */
 .number-input-vehicle.valid {
-    border-color: #F4A63B !important;
+    border-color: #f4a63b !important;
     box-shadow: 0 0 0 2px rgba(189, 130, 42, 0.2) !important;
 }
 
@@ -240,7 +266,7 @@ body {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #2AB88F;
+    color: #01A79D;
     font-weight: bold;
     font-size: 1.2em;
     animation: fadeIn 0.3s ease;
@@ -272,7 +298,7 @@ body {
     height: 6px;
     -webkit-appearance: none;
     appearance: none;
-    background: linear-gradient(to right, #F7931E 0%, #F7931E 65%, #DDDDDD 65%, #DDDDDD 100%);
+    background: linear-gradient(to right, #FBB040 0%, #FBB040 65%, #DDDDDD 65%, #DDDDDD 100%);
     border-radius: 3px;
     outline: none;
     margin-top: 5px;
@@ -285,7 +311,7 @@ body {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #2AB88F;
+    background: #01A79D;
     cursor: grab;
     margin-top: -6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -296,7 +322,7 @@ body {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #2AB88F;
+    background: #01A79D;
     cursor: grab;
     margin-top: -6px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -305,11 +331,11 @@ body {
 
 /* Battery SOC slider has orange thumb */
 .battery-slider::-webkit-slider-thumb {
-    background: #F7931E;
+    background: #FBB040;
 }
 
 .battery-slider::-moz-range-thumb {
-    background: #F7931E;
+    background: #FBB040;
 }
 
 /* Slider Labels */
@@ -325,13 +351,13 @@ body {
 /* Action Button */
 .action-btn {
     position: absolute;
-    bottom: 15px;
+    bottom: 12px;
     left: 57%;
     transform: translateX(-50%);
-    background-color: #2AB88F;
+    background-color: #01A79D;
     color: white;
     padding: 15px 50px;
-    border: none;
+    border:4px solid #06efe0;
     border-radius: 8px;
     font-size: 1.15em;
     font-weight: 500;
@@ -346,7 +372,9 @@ body {
 }
 
 .action-btn:hover {
-    background-color: #249D7B;
+    background-color: white;
+    border:4px solid #01A79D;
+    color: #01A79D;
     transform: translateX(-50%) translateY(-2px);
     box-shadow: 0 6px 15px rgba(42, 184, 143, 0.4);
 }

@@ -30,43 +30,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid #EFEFEF;
+    /* border-right: 1px solid #EFEFEF; */
 }
 
 /* Logo Container */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 60px;
-    padding-left: 20px;
-}
-
-/* Geometric Logo */
-.logo-geometric {
-    position: relative;
-    width: 30px;
-    height: 30px;
-}
-
-.outer-shape {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid #2AB88F;
-    border-radius: 4px;
-    transform: rotate(45deg);
-}
-
-.inner-shape {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    height: 60%;
-    border: 2px solid #F7931E;
-    border-radius: 2px;
-    transform: translate(-50%, -50%) rotate(-45deg);
+.logo img {
+    width: 15dvw;
+    height: auto;
 }
 
 /* Navigation Buttons */
@@ -78,12 +48,12 @@ body {
 }
 
 .nav-btn {
-    width: 140px;
-    height: 20dvh;
+    width: 22dvh;
+    height: 18dvh;
     padding: 18px 20px;
     border: none;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 25px;
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -92,21 +62,53 @@ body {
 }
 
 .home-btn {
-    background-color: #2AB88F;
+    background-color: #01A79D;
+    border: none;
+    /* padding: 10px 20px; */
+    cursor: pointer;
+    transition: all 0.5s ease; 
 }
 
 .home-btn:hover {
-    background-color: #249D7B;
+    background-color: white;
+    border: 2px solid #01A79D;
     transform: translateY(-2px);
+}
+
+.home-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.home-btn:hover a {
+    color: #01A79D;
 }
 
 .logout-btn {
-    background-color: #F7931E;
+    background-color: #FBB040;
+    border: none;
+    /* padding: 10px 20px; */
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
 
 .logout-btn:hover {
-    background-color: #D17C1A;
+    background-color: white;
+    border: 2px solid #FBB040;
     transform: translateY(-2px);
+}
+
+.logout-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.logout-btn:hover a {
+    color: #FBB040;
 }
 
 /* Main content */
@@ -126,7 +128,7 @@ body {
 }
 
 .video-container video {
-    width: 85dvw;
+    width: 80dvw;
     height: 75dvh;
     object-fit: cover;
     border-radius: 0 0 0 10px;

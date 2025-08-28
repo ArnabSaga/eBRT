@@ -11,20 +11,21 @@
 
 <body>
     <div class="main-container">
-        <!-- Left Sidebar -->
+        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="./assets/img/logo.png" alt="logo">
+                <img src="./assets/img/logo.png" alt="logo" />
             </div>
 
             <nav class="sidebar-nav">
                 <button class="nav-btn home-btn">
-                    <a href="#" style="color: white; text-decoration: none;">HOME</a>
+                    <a href="#">HOME</a>
                 </button>
                 <button class="nav-btn logout-btn">
-                    <a href="#" style="color: white; text-decoration: none;">LOG OUT</a>
+                    <a href="#">LOG OUT</a>
                 </button>
             </nav>
+
             <!-- Run Simulation Button -->
             <div class="simulation-btn-container">
                 <button class="simulation-btn" data-testid="button-run-simulation">RUN SIMULATION</button>
@@ -39,8 +40,11 @@
                 <div class="dropdown-container">
                     <label class="dropdown-label">MOTOR TYPE</label>
                     <div class="dropdown-wrapper">
-                        <select class="dropdown" data-testid="select-motor-type">
-                            <option>Permanent Magnet Synchronous Motor</option>
+                        <select class="dropdown" data-testid="select-motor-type" required>
+                            <option value="" disabled selected>Select motor type</option>
+                            <option value="Induction Motor">Induction Motor</option>
+                            <option value="Synchronous Motor">Synchronous Motor</option>
+                            <option value="Permanent Magnet Synchronous Motor">Permanent Magnet Synchronous Motor</option>
                         </select>
                         <div class="dropdown-arrow">▼</div>
                     </div>
@@ -70,8 +74,11 @@
                 <div class="dropdown-container">
                     <label class="dropdown-label battery-label">Battery Type</label>
                     <div class="dropdown-wrapper">
-                        <select class="dropdown" data-testid="select-battery-type">
-                            <option>Lithium Phosphate Iron</option>
+                        <select class="dropdown" data-testid="select-battery-type" required>
+                            <option value="" disabled selected>Select battery type</option>
+                            <option value="NMC Battery">NMC Battery</option>
+                            <option value="LFP Battery">LFP Battery</option>
+                            <option value="LTO Battery">LTO Battery</option>
                         </select>
                         <div class="dropdown-arrow">▼</div>
                     </div>

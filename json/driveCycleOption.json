@@ -1,113 +1,838 @@
 {
-    "configuration": {
-      "Driving_Cycle": {
-        "City_Name": {
-          "user_input": {
-            "type": "Click on the World Map",
-            "options": [
-              {"label": "Amsterdam", "value": 1},
-              {"label": "Athens", "value": 2},
-              {"label": "Barcelona", "value": 3},
-              {"label": "Prague", "value": 4},
-              {"label": "Rimini", "value": 5},
-              {"label": "Eindhoven", "value": 6}
-            ]
-          },
-          "back_end_value": "Constant"
-        },
-        "Month": {
-          "user_input": {
-            "type": "Dropdown Menu",
-            "options": [
-              {"label": "January", "value": 1},
-              {"label": "February", "value": 2},
-              {"label": "March", "value": 3},
-              {"label": "April", "value": 4},
-              {"label": "May", "value": 5},
-              {"label": "June", "value": 6},
-              {"label": "July", "value": 7},
-              {"label": "August", "value": 8},
-              {"label": "September", "value": 9},
-              {"label": "October", "value": 10},
-              {"label": "November", "value": 11},
-              {"label": "December", "value": 12}
-            ]
-          },
-          "back_end_value": "Constant"
-        },
-        "ECO_Options": {
-          "user_input": {
-            "type": "Radio Buttons",
-            "options": [
-              {"label": "No ECO features", "value": 0},
-              {"label": "ECO features", "value": 1},
-              {"label": "ECO_Threshold", "value": null},
-              {"label": "User Input", "value": null},
-              {"label": "Slider (10% ~ 25%)", "value": "Constant"}
-            ]
-          },
-          "back_end_value": "Constant",
-          "note": "Add this field to the website. Important."
-        },
-        "Cycle_Type": {
-          "user_input": {
-            "type": "Dropdown Menu",
-            "options": [
-              {"label": "City_Name Specific", "value": 0},
-              {"label": "WLTC", "value": 1},
-              {"label": "NEDC", "value": 2},
-              {"label": "SORT", "value": 3},
-              {"label": "VECTO", "value": 4},
-              {"label": "FTP", "value": 5},
-              {"label": "Custom", "value": 6}
-            ]
-          },
-          "back_end_value": "Constant"
-        },
-        "Time": {
-          "user_input": "Array (if Cycle_Type == 0 or 6)",
-          "back_end_value": {
-            "conditional": {
-              "if_Cycle_Type_0_or_6": "Array",
-              "else": 0
+    "_meta": {
+        "version": "1.0.0",
+        "generated_at": "2025-08-27",
+        "notes": [
+            "Add Scenario_data group to the website (visible only for standard cycles).",
+            "Add ECO_Threshold field to the website.",
+            "If Altitude is not provided, send 0 (scalar) instead of an array; backend assumes flat road.",
+            "For standard cycles (WLTC, NEDC, SORT, VECTO, FTP), Altitude must be 0 (flat).",
+            "For City specific, altitude is already known and need not be sent.",
+            "Calculated values are shown to the user but MUST NOT be sent to backend.",
+            "Any unspecified configuration value is simulated by backend defaults."
+        ]
+    },
+    "enums": {
+        "months": [
+            {
+                "id": 1,
+                "name": "January"
+            },
+            {
+                "id": 2,
+                "name": "February"
+            },
+            {
+                "id": 3,
+                "name": "March"
+            },
+            {
+                "id": 4,
+                "name": "April"
+            },
+            {
+                "id": 5,
+                "name": "May"
+            },
+            {
+                "id": 6,
+                "name": "June"
+            },
+            {
+                "id": 7,
+                "name": "July"
+            },
+            {
+                "id": 8,
+                "name": "August"
+            },
+            {
+                "id": 9,
+                "name": "September"
+            },
+            {
+                "id": 10,
+                "name": "October"
+            },
+            {
+                "id": 11,
+                "name": "November"
+            },
+            {
+                "id": 12,
+                "name": "December"
             }
-          }
-        },
-        "Speed": {
-          "user_input": "Array (if Cycle_Type == 0 or 6)",
-          "back_end_value": {
-            "conditional": {
-              "if_Cycle_Type_0_or_6": "Array",
-              "else": 0
+        ],
+        "cities": [
+            {
+                "id": 1,
+                "name": "Amsterdam",
+                "region": "EU"
+            },
+            {
+                "id": 2,
+                "name": "Athens",
+                "region": "EU"
+            },
+            {
+                "id": 3,
+                "name": "Barcelona",
+                "region": "EU"
+            },
+            {
+                "id": 4,
+                "name": "Prague",
+                "region": "EU"
+            },
+            {
+                "id": 5,
+                "name": "Rimini",
+                "region": "EU"
+            },
+            {
+                "id": 6,
+                "name": "Eindhoven",
+                "region": "EU"
             }
-          }
+        ],
+        "eco_options": [
+            {
+                "id": 0,
+                "name": "No ECO features"
+            },
+            {
+                "id": 1,
+                "name": "ECO features"
+            },
+            {
+                "id": 2,
+                "name": "ECO_Threshold"
+            },
+            {
+                "id": 3,
+                "name": "User Input"
+            },
+            {
+                "id": 4,
+                "name": "Slider (10%–25%)"
+            }
+        ],
+        "cycle_types": [
+            {
+                "id": 0,
+                "name": "City_Specific"
+            },
+            {
+                "id": 1,
+                "name": "WLTC"
+            },
+            {
+                "id": 2,
+                "name": "NEDC"
+            },
+            {
+                "id": 3,
+                "name": "SORT"
+            },
+            {
+                "id": 4,
+                "name": "VECTO"
+            },
+            {
+                "id": 5,
+                "name": "FTP"
+            },
+            {
+                "id": 6,
+                "name": "Custom"
+            }
+        ],
+        "motor_types": [
+            {
+                "id": 1,
+                "name": "Induction Motor"
+            },
+            {
+                "id": 2,
+                "name": "Synchronous Motor"
+            },
+            {
+                "id": 3,
+                "name": "Permanent Magnet Synchronous Motor"
+            }
+        ],
+        "battery_chemistry": [
+            {
+                "id": 1,
+                "name": "NMC Battery"
+            },
+            {
+                "id": 2,
+                "name": "LFP Battery"
+            },
+            {
+                "id": 3,
+                "name": "LTO Battery"
+            }
+        ],
+        "scenario_bus_length": [
+            {
+                "id": 1,
+                "name": "12m"
+            },
+            {
+                "id": 2,
+                "name": "18m"
+            },
+            {
+                "id": 3,
+                "name": "24m"
+            },
+            {
+                "id": 4,
+                "name": "Custom"
+            }
+        ]
+    },
+    "ui_schema": {
+        "Driving_Cycle": {
+            "fields": [
+                {
+                    "key": "city_name",
+                    "label": "City Name",
+                    "type": "map-picker",
+                    "data_source": "user",
+                    "enum": "cities",
+                    "backend_key": "City_Name"
+                },
+                {
+                    "key": "month",
+                    "label": "Month",
+                    "type": "dropdown",
+                    "enum": "months",
+                    "data_source": "user",
+                    "backend_key": "Month"
+                },
+                {
+                    "key": "eco_option",
+                    "label": "ECO Options",
+                    "type": "dropdown",
+                    "enum": "eco_options",
+                    "data_source": "user",
+                    "backend_key": "ECO_Options"
+                },
+                {
+                    "key": "eco_threshold",
+                    "label": "ECO Threshold (%)",
+                    "type": "slider",
+                    "min": 10,
+                    "max": 25,
+                    "step": 1,
+                    "data_source": "user",
+                    "visible_if": {
+                        "eco_option": 2
+                    },
+                    "backend_key": "ECO_Threshold"
+                },
+                {
+                    "key": "cycle_type",
+                    "label": "Cycle Type",
+                    "type": "radio",
+                    "enum": "cycle_types",
+                    "data_source": "user",
+                    "backend_key": "Cycle_Type"
+                },
+                {
+                    "key": "time_s",
+                    "label": "Time (s)",
+                    "type": "array-number",
+                    "data_source": "user",
+                    "visible_if": {
+                        "cycle_type_in": [
+                            0,
+                            6
+                        ]
+                    },
+                    "backend_key": "Time_s"
+                },
+                {
+                    "key": "speed_ms",
+                    "label": "Speed (m/s)",
+                    "type": "array-number",
+                    "data_source": "user",
+                    "visible_if": {
+                        "cycle_type_in": [
+                            0,
+                            6
+                        ]
+                    },
+                    "backend_key": "Speed_mps"
+                },
+                {
+                    "key": "altitude_m",
+                    "label": "Altitude (m)",
+                    "type": "array-number-or-scalar",
+                    "data_source": "user",
+                    "visible_if": {
+                        "cycle_type": 6
+                    },
+                    "backend_key": "Altitude_m",
+                    "rules": [
+                        "If not provided for Custom, send 0 (scalar).",
+                        "If cycle_type is standard (1–5), force value 0 and hide in UI.",
+                        "If cycle_type is City_Specific (0), omit from payload."
+                    ]
+                }
+            ]
         },
-        "Altitude": {
-          "user_input": "Array or 0",
-          "back_end_value": "Array or 0",
-          "notes": [
-            "If Altitude is not provided, then send 0 instead of an array, and back-end will assume a flat road, i.e., no slope.",
-            "For city specific, altitude is known already and does not need to be sent.",
-            "If user chooses any of the standard driving cycles (WLTP, NEDC, SORT, VECTO, or FTP) then the Altitude is assumed to be 0."
-          ]
+        "Environment_data": {
+            "fields": [
+                {
+                    "key": "WindSpeed_ms",
+                    "label": "Wind Speed (m/s)",
+                    "type": "slider",
+                    "min": 0,
+                    "max": 10,
+                    "step": 0.1,
+                    "backend_key": "WindSpeed_ms"
+                },
+                {
+                    "key": "Humidity_pct",
+                    "label": "Humidity (%)",
+                    "type": "slider",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "backend_key": "Humidity_pct"
+                },
+                {
+                    "key": "AvgTemp_C",
+                    "label": "Average Temp (°C)",
+                    "type": "slider",
+                    "min": -5,
+                    "max": 35,
+                    "step": 0.5,
+                    "backend_key": "AvgTemp_C"
+                },
+                {
+                    "key": "Solar_Irradiance_Wh_m2",
+                    "label": "Solar Irradiance (Wh/m²)",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Solar_Irradiance_Wh_m2"
+                },
+                {
+                    "key": "CabinTempRef_C",
+                    "label": "Cabin Temp Ref (°C)",
+                    "type": "slider",
+                    "min": 10,
+                    "max": 30,
+                    "step": 1,
+                    "backend_key": "CabinTempRef_C"
+                },
+                {
+                    "key": "AuxiliarySystemVoltage_V",
+                    "label": "Aux System Voltage (V)",
+                    "type": "constant",
+                    "default": 24,
+                    "backend_key": "AuxiliarySystemVoltage_V"
+                },
+                {
+                    "key": "AuxiliarySystemTotalPower_kW",
+                    "label": "Aux System Total Power (kW)",
+                    "type": "constant",
+                    "default": 2,
+                    "backend_key": "AuxiliarySystemTotalPower_kW"
+                }
+            ]
+        },
+        "Vehicle_data": {
+            "fields": [
+                {
+                    "key": "VehicleMass_kg",
+                    "label": "Vehicle Mass (kg)",
+                    "type": "constant",
+                    "default": 12000,
+                    "backend_key": "VehicleMass_kg"
+                },
+                {
+                    "key": "VehicleWidth_m",
+                    "label": "Vehicle Width (m)",
+                    "type": "constant",
+                    "default": 2.5,
+                    "backend_key": "VehicleWidth_m"
+                },
+                {
+                    "key": "VehicleHeight_m",
+                    "label": "Vehicle Height (m)",
+                    "type": "constant",
+                    "default": 3.2,
+                    "backend_key": "VehicleHeight_m"
+                },
+                {
+                    "key": "WheelRadius_m",
+                    "label": "Wheel Radius (m)",
+                    "type": "constant",
+                    "default": 0.51,
+                    "backend_key": "WheelRadius_m"
+                },
+                {
+                    "key": "AirDragCoeff",
+                    "label": "Air Drag Coefficient",
+                    "type": "constant",
+                    "default": 0.65,
+                    "backend_key": "AirDragCoeff"
+                },
+                {
+                    "key": "RollResist",
+                    "label": "Rolling Resistance Coeff.",
+                    "type": "constant",
+                    "default": 0.008,
+                    "backend_key": "RollResist"
+                },
+                {
+                    "key": "MaxPassenger",
+                    "label": "Max Passenger",
+                    "type": "constant",
+                    "default": 70,
+                    "backend_key": "MaxPassenger"
+                },
+                {
+                    "key": "VehMaxSpeed_kph",
+                    "label": "Vehicle Max Speed (km/h)",
+                    "type": "constant",
+                    "default": 90,
+                    "backend_key": "VehMaxSpeed_kph"
+                }
+            ]
+        },
+        "Charger_data": {
+            "fields": [
+                {
+                    "key": "Opp_Charger_Flag",
+                    "label": "Opportunity Charger Present",
+                    "type": "checkbox",
+                    "backend_key": "Opp_Charger_Flag",
+                    "unchecked": 0,
+                    "checked": 1
+                },
+                {
+                    "key": "Num_Opp_Charger",
+                    "label": "# Opportunity Chargers",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Num_Opp_Charger"
+                },
+                {
+                    "key": "Opp_Charger_Power_kW",
+                    "label": "Opportunity Charger Power (kW)",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Opp_Charger_Power_kW"
+                },
+                {
+                    "key": "IMC_Charger_Flag",
+                    "label": "IMC Charger Present",
+                    "type": "checkbox",
+                    "backend_key": "IMC_Charger_Flag",
+                    "unchecked": 0,
+                    "checked": 1
+                },
+                {
+                    "key": "Num_IMC_Charger",
+                    "label": "# IMC Chargers",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Num_IMC_Charger"
+                },
+                {
+                    "key": "IMC_Charger_Power_kW",
+                    "label": "IMC Charger Power (kW)",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "IMC_Charger_Power_kW"
+                },
+                {
+                    "key": "Dep_Charger_Flag",
+                    "label": "Depot Charger Present",
+                    "type": "checkbox",
+                    "backend_key": "Dep_Charger_Flag",
+                    "unchecked": 0,
+                    "checked": 1
+                },
+                {
+                    "key": "Num_Dep_Charger",
+                    "label": "# Depot Chargers",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Num_Dep_Charger"
+                },
+                {
+                    "key": "Dep_Charger_Power_kW",
+                    "label": "Depot Charger Power (kW)",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Dep_Charger_Power_kW"
+                },
+                {
+                    "key": "Dep_Charger_Num_Modules",
+                    "label": "Depot Charger # Modules",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Dep_Charger_Num_Modules"
+                }
+            ]
+        },
+        "Electric_Motor_data": {
+            "fields": [
+                {
+                    "key": "Max_Traction_Torque_Nm",
+                    "label": "Max Traction Torque (Nm)",
+                    "type": "constant",
+                    "default": 3000,
+                    "backend_key": "Max_Traction_Torque_Nm"
+                },
+                {
+                    "key": "Max_Regenerative_Torque_Nm",
+                    "label": "Max Regenerative Torque (Nm)",
+                    "type": "constant",
+                    "default": 2000,
+                    "backend_key": "Max_Regenerative_Torque_Nm"
+                },
+                {
+                    "key": "Rated_Motor_Speed_RPM",
+                    "label": "Rated Motor Speed (RPM)",
+                    "type": "constant",
+                    "default": 2200,
+                    "backend_key": "Rated_Motor_Speed_RPM"
+                },
+                {
+                    "key": "Max_Motor_Speed_RPM",
+                    "label": "Max Motor Speed (RPM)",
+                    "type": "constant",
+                    "default": 6000,
+                    "backend_key": "Max_Motor_Speed_RPM"
+                },
+                {
+                    "key": "Traction_Torque_at_Max_Speed_Nm",
+                    "label": "Traction Torque @ Max Speed (Nm)",
+                    "type": "constant",
+                    "default": 800,
+                    "backend_key": "Traction_Torque_at_Max_Speed_Nm"
+                },
+                {
+                    "key": "Regenerative_Torque_at_Max_Speed_Nm",
+                    "label": "Regen Torque @ Max Speed (Nm)",
+                    "type": "constant",
+                    "default": 400,
+                    "backend_key": "Regenerative_Torque_at_Max_Speed_Nm"
+                },
+                {
+                    "key": "Minimum_Regenerative_Speed_RPM",
+                    "label": "Minimum Regenerative Speed (RPM)",
+                    "type": "calculated",
+                    "show_only": true
+                },
+                {
+                    "key": "Rated_power_kW",
+                    "label": "Rated Power (kW)",
+                    "type": "calculated",
+                    "show_only": true
+                },
+                {
+                    "key": "Number_of_Motors",
+                    "label": "Number of Motors",
+                    "type": "constant",
+                    "default": 1,
+                    "backend_key": "Number_of_Motors"
+                },
+                {
+                    "key": "Motor_Type",
+                    "label": "Motor Type",
+                    "type": "dropdown",
+                    "enum": "motor_types",
+                    "backend_key": "Motor_Type"
+                }
+            ]
+        },
+        "Energy_Storage_data": {
+            "fields": [
+                {
+                    "key": "BatteryPackVoltage_V",
+                    "label": "Battery Pack Voltage (V)",
+                    "type": "constant",
+                    "default": 650,
+                    "backend_key": "BatteryPackVoltage_V"
+                },
+                {
+                    "key": "BatteryPackStorageCapacity_kWh",
+                    "label": "Battery Pack Storage Capacity (kWh)",
+                    "type": "constant",
+                    "default": 300,
+                    "backend_key": "BatteryPackStorageCapacity_kWh"
+                },
+                {
+                    "key": "BatteryPackUsableCapacity_kWh",
+                    "label": "Battery Pack Usable Capacity (kWh)",
+                    "type": "calculated",
+                    "show_only": true
+                },
+                {
+                    "key": "MaximumSoC_pct",
+                    "label": "Maximum SoC (%)",
+                    "type": "constant",
+                    "default": 90,
+                    "backend_key": "MaximumSoC_pct"
+                },
+                {
+                    "key": "MinimumSoC_pct",
+                    "label": "Minimum SoC (%)",
+                    "type": "constant",
+                    "default": 10,
+                    "backend_key": "MinimumSoC_pct"
+                },
+                {
+                    "key": "Initial_Battery_SoC_pct",
+                    "label": "Initial Battery SoC (%)",
+                    "type": "constant",
+                    "default_from": "MaximumSoC_pct",
+                    "backend_key": "Initial_Battery_SoC_pct"
+                },
+                {
+                    "key": "Initial_Battery_Age_years",
+                    "label": "Initial Battery Age (years)",
+                    "type": "constant",
+                    "default": 0,
+                    "backend_key": "Initial_Battery_Age_years"
+                },
+                {
+                    "key": "Maximum_Charging_Current_A",
+                    "label": "Max Charging Current (A)",
+                    "type": "constant",
+                    "default": 400,
+                    "backend_key": "Maximum_Charging_Current_A"
+                },
+                {
+                    "key": "Maximum_Discharging_Current_A",
+                    "label": "Max Discharging Current (A)",
+                    "type": "constant",
+                    "default": 450,
+                    "backend_key": "Maximum_Discharging_Current_A"
+                },
+                {
+                    "key": "Number_of_Cells_in_Series_Ns",
+                    "label": "Cells in Series (Ns)",
+                    "type": "calculated",
+                    "show_only": true
+                },
+                {
+                    "key": "Number_of_Strings_in_Parallel_Np",
+                    "label": "Strings in Parallel (Np)",
+                    "type": "calculated",
+                    "show_only": true
+                },
+                {
+                    "key": "Battery_Chemistry",
+                    "label": "Battery Chemistry",
+                    "type": "dropdown",
+                    "enum": "battery_chemistry",
+                    "backend_key": "Battery_Chemistry"
+                }
+            ]
+        },
+        "Scenario_data": {
+            "visible_if": {
+                "Driving_Cycle.cycle_type_in": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "fields": [
+                {
+                    "key": "VehicleLength",
+                    "label": "Vehicle Length",
+                    "type": "dropdown",
+                    "enum": "scenario_bus_length",
+                    "backend_key": "VehicleLength"
+                },
+                {
+                    "key": "Return_Trip_Distance_km",
+                    "label": "Return Trip Distance (km)",
+                    "type": "hidden-constant",
+                    "default": 0,
+                    "backend_key": "Return_Trip_Distance_km"
+                },
+                {
+                    "key": "Number_of_Buses_in_Fleet",
+                    "label": "# Buses in Fleet",
+                    "type": "hidden-constant",
+                    "default": 0,
+                    "backend_key": "Number_of_Buses_in_Fleet"
+                },
+                {
+                    "key": "Average_Velocity_of_Route_kph",
+                    "label": "Average Route Velocity (km/h)",
+                    "type": "hidden-constant",
+                    "default": 0,
+                    "backend_key": "Average_Velocity_of_Route_kph"
+                }
+            ]
         }
-      },
-      "Scenario_data": {
-        "Return_Trip_Distance": {
-          "user_input": "Not shown in webpage",
-          "back_end_value": "Constant",
-          "visibility": "Only appears if user selects standard driving cycle"
+    },
+    "backend_payload_template": {
+        "Driving_Cycle": {
+            "City_Name": null,
+            "Month": null,
+            "ECO_Options": null,
+            "ECO_Threshold": null,
+            "Cycle_Type": null,
+            "Time_s": null,
+            "Speed_mps": null,
+            "Altitude_m": 0
         },
-        "Number_of_Buses_in_Fleet": {
-          "user_input": "Not shown in webpage",
-          "back_end_value": "Constant",
-          "visibility": "Only appears if user selects standard driving cycle"
+        "Environment_data": {
+            "WindSpeed_ms": 0,
+            "Humidity_pct": 0,
+            "AvgTemp_C": 0,
+            "Solar_Irradiance_Wh_m2": 0,
+            "CabinTempRef_C": 20,
+            "AuxiliarySystemVoltage_V": 24,
+            "AuxiliarySystemTotalPower_kW": 2
         },
-        "Average_Velocity_of_Route": {
-          "user_input": "Not shown in webpage",
-          "back_end_value": "Constant",
-          "visibility": "Only appears if user selects standard driving cycle"
+        "Vehicle_data": {
+            "VehicleMass_kg": 12000,
+            "VehicleWidth_m": 2.5,
+            "VehicleHeight_m": 3.2,
+            "WheelRadius_m": 0.51,
+            "AirDragCoeff": 0.65,
+            "RollResist": 0.008,
+            "MaxPassenger": 70,
+            "VehMaxSpeed_kph": 90
+        },
+        "Charger_data": {
+            "Opp_Charger_Flag": 0,
+            "Num_Opp_Charger": 0,
+            "Opp_Charger_Power_kW": 0,
+            "IMC_Charger_Flag": 0,
+            "Num_IMC_Charger": 0,
+            "IMC_Charger_Power_kW": 0,
+            "Dep_Charger_Flag": 0,
+            "Num_Dep_Charger": 0,
+            "Dep_Charger_Power_kW": 0,
+            "Dep_Charger_Num_Modules": 0
+        },
+        "Electric_Motor_data": {
+            "Max_Traction_Torque_Nm": 3000,
+            "Max_Regenerative_Torque_Nm": 2000,
+            "Rated_Motor_Speed_RPM": 2200,
+            "Max_Motor_Speed_RPM": 6000,
+            "Traction_Torque_at_Max_Speed_Nm": 800,
+            "Regenerative_Torque_at_Max_Speed_Nm": 400,
+            "Number_of_Motors": 1,
+            "Motor_Type": 1
+        },
+        "Energy_Storage_data": {
+            "BatteryPackVoltage_V": 650,
+            "BatteryPackStorageCapacity_kWh": 300,
+            "MaximumSoC_pct": 90,
+            "MinimumSoC_pct": 10,
+            "Initial_Battery_SoC_pct": 90,
+            "Initial_Battery_Age_years": 0,
+            "Maximum_Charging_Current_A": 400,
+            "Maximum_Discharging_Current_A": 450,
+            "Battery_Chemistry": 1
+        },
+        "Scenario_data": {
+            "VehicleLength": 1,
+            "Return_Trip_Distance_km": 0,
+            "Number_of_Buses_in_Fleet": 0,
+            "Average_Velocity_of_Route_kph": 0
         }
-      }
+    },
+    "rules_engine": {
+        "AltitudeRule": "IF Cycle_Type in [1,2,3,4,5] THEN Altitude_m=0; IF Cycle_Type=0 THEN omit Altitude_m; IF Cycle_Type=6 AND Altitude_m is empty THEN Altitude_m=0",
+        "ScenarioVisibility": "Scenario_data is visible and sent ONLY when Cycle_Type in [1,2,3,4,5]",
+        "EcoThresholdVisibility": "ECO_Threshold is required ONLY when ECO_Options==ECO_Threshold",
+        "CalculatedFields": [
+            "Minimum_Regenerative_Speed_RPM",
+            "Rated_power_kW",
+            "BatteryPackUsableCapacity_kWh",
+            "Number_of_Cells_in_Series_Ns",
+            "Number_of_Strings_in_Parallel_Np"
+        ],
+        "CheckboxEncoding": "All *_Flag fields: unchecked=0, checked=1"
+    },
+    "example_backend_payload": {
+        "Driving_Cycle": {
+            "City_Name": "Munich",
+            "Month": 10,
+            "ECO_Options": 2,
+            "ECO_Threshold": 18,
+            "Cycle_Type": 1,
+            "Time_s": null,
+            "Speed_mps": null,
+            "Altitude_m": 0
+        },
+        "Environment_data": {
+            "WindSpeed_ms": 3.2,
+            "Humidity_pct": 55,
+            "AvgTemp_C": 12,
+            "Solar_Irradiance_Wh_m2": 0,
+            "CabinTempRef_C": 22,
+            "AuxiliarySystemVoltage_V": 24,
+            "AuxiliarySystemTotalPower_kW": 2
+        },
+        "Vehicle_data": {
+            "VehicleMass_kg": 12500,
+            "VehicleWidth_m": 2.5,
+            "VehicleHeight_m": 3.2,
+            "WheelRadius_m": 0.51,
+            "AirDragCoeff": 0.65,
+            "RollResist": 0.008,
+            "MaxPassenger": 70,
+            "VehMaxSpeed_kph": 90
+        },
+        "Charger_data": {
+            "Opp_Charger_Flag": 1,
+            "Num_Opp_Charger": 2,
+            "Opp_Charger_Power_kW": 150,
+            "IMC_Charger_Flag": 0,
+            "Num_IMC_Charger": 0,
+            "IMC_Charger_Power_kW": 0,
+            "Dep_Charger_Flag": 1,
+            "Num_Dep_Charger": 4,
+            "Dep_Charger_Power_kW": 120,
+            "Dep_Charger_Num_Modules": 8
+        },
+        "Electric_Motor_data": {
+            "Max_Traction_Torque_Nm": 3200,
+            "Max_Regenerative_Torque_Nm": 2100,
+            "Rated_Motor_Speed_RPM": 2200,
+            "Max_Motor_Speed_RPM": 6000,
+            "Traction_Torque_at_Max_Speed_Nm": 820,
+            "Regenerative_Torque_at_Max_Speed_Nm": 420,
+            "Number_of_Motors": 2,
+            "Motor_Type": 3
+        },
+        "Energy_Storage_data": {
+            "BatteryPackVoltage_V": 700,
+            "BatteryPackStorageCapacity_kWh": 350,
+            "MaximumSoC_pct": 90,
+            "MinimumSoC_pct": 10,
+            "Initial_Battery_SoC_pct": 90,
+            "Initial_Battery_Age_years": 0,
+            "Maximum_Charging_Current_A": 450,
+            "Maximum_Discharging_Current_A": 500,
+            "Battery_Chemistry": 2
+        },
+        "Scenario_data": {
+            "VehicleLength": 2,
+            "Return_Trip_Distance_km": 0,
+            "Number_of_Buses_in_Fleet": 0,
+            "Average_Velocity_of_Route_kph": 0
+        }
     }
-  } 
+}

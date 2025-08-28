@@ -1,0 +1,501 @@
+/* ===== Reset / Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+:root {
+    --footer-h: 72px;
+    --gap: 20px;
+    --teal: #01A79D;
+    --orange: #FBB040;
+    --blue: #3498db;
+    --gray: #666;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===== Shell ===== */
+.container {
+    display: flex;
+    /* height: calc(100vh - var(--footer-h)); */
+    height: 80%;
+    background: #fff;
+    padding-inline: 16px;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    flex: 0 0 clamp(180px, 18vw, 240px);
+    background: #fff;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+/* Logo */
+.logo img {
+    width: 15dvw;
+    height: auto;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 6.5em;
+}
+
+.nav-btn {
+    width: 22dvh;
+    height: 18dvh;
+    padding: 18px 20px;
+    border: none;
+    font-weight: 400;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    margin: 0 auto;
+}
+
+.home-btn {
+    background-color: #01A79D;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s ease; 
+}
+
+.home-btn:hover {
+    background-color: white;
+    border: 2px solid #01A79D;
+    transform: translateY(-2px);
+}
+
+.home-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.home-btn:hover a {
+    color: #01A79D;
+}
+
+.logout-btn {
+    background-color: #FBB040;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.logout-btn:hover {
+    background-color: white;
+    border: 2px solid #FBB040;
+    transform: translateY(-2px);
+}
+
+.logout-btn a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.5s ease;
+}
+
+.logout-btn:hover a {
+    color: #FBB040;
+}
+/* ===== Main (header + content fills rest) ===== */
+.main-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: var(--gap);
+    padding: 16px 0;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    font-size: 4em;
+    color: #555;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, .06);
+}
+
+/* CONTENT takes full space */
+.content {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* ===== Dashboard ===== */
+.dashboard-grid {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* charts | metrics */
+    gap: var(--gap);
+    align-items: stretch;
+}
+
+/* Left: stacked charts */
+.charts-container {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--gap);
+}
+
+.chart-box {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 0;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.chart-header {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 6px;
+}
+
+/* ECharts needs a sized div */
+.chart {
+    width: 100%;
+    height: 100%;
+}
+
+/* marker popup (kept if you want to control external hint) */
+.marker-popup {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+    font-size: 10px;
+    display: none;
+    z-index: 5;
+}
+
+.marker-popup.show {
+    display: block;
+}
+
+.popup-time {
+    color: #777;
+    margin-bottom: 3px;
+}
+
+.popup-value {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.popup-legend {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 9px;
+    color: #777;
+}
+
+.legend-line {
+    width: 12px;
+    height: 2px;
+}
+
+.legend-line.blue {
+    background: #4a90e2;
+}
+
+.legend-line.green {
+    background: #27ae60;
+}
+
+.chart-legend {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+    color: #20b2aa;
+}
+
+/* ===== Metrics ===== */
+.metrics {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+}
+
+.metrics .row {
+    display: grid;
+    gap: 12px;
+}
+
+.gauges-row,
+.temps-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.performance-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.metric {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    height: 100%;
+}
+
+.label {
+    font-size: 16px;
+    color: #777;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+/* Mini charts */
+.mini-chart {
+    width: 100%;
+    height: 40px;
+}
+
+/* Fuel Rate chip */
+.fuel-display {
+    background: #555;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 16px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 1px;
+}
+
+.fuel-rate .label {
+    padding-bottom: 8px;
+}
+
+.fuel-display span {
+    margin-top: 10px;
+}
+
+.fuel-display .value {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.fuel-display .unit {
+    font-size: 14px;
+}
+
+/* Gauges */
+.metric.gauge .gauge-container,
+.metric.temp-gauge .gauge-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gauge-container {
+    position: relative;
+}
+
+.gauge-container.small {
+    width: 35px;
+    height: 35px;
+}
+
+.gauge-value {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.gauge-value.small {
+    font-size: 9px;
+}
+
+.gauge-value.orange {
+    color: #ff8c00;
+}
+
+.gauge-value.blue {
+    color: var(--blue);
+}
+
+.gauge-value.green {
+    color: #27ae60;
+}
+
+.dtc .dtc-value {
+    font-size: 48px;
+    font-weight: 800;
+    color: #e74c3c;
+    line-height: 1;
+}
+
+/* Performance tiles */
+.performance {
+    color: #fff;
+    font-weight: 800;
+    border-radius: 6px;
+    width: auto;
+    position: relative;
+    padding: 36px 12px 12px;
+}
+
+.performance.green {
+    background: #27ae60;
+}
+
+.performance.blue {
+    background: var(--blue);
+}
+
+.performance .perf-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 8px 10px;
+    background: #fff;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+}
+
+.perf-value {
+    font-size: 32px;
+    margin: 6px 0;
+    line-height: 1;
+}
+
+.perf-unit {
+    font-size: 12px;
+    opacity: .9;
+}
+
+.rpm .mini-chart {
+    height: 48px;
+}
+
+/* Bottom note */
+.resimulate {
+    justify-self: end;
+    align-self: end;
+    color: #666;
+    font-style: italic;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    padding: 6px 2px;
+    grid-column: 1 / -1;
+}
+
+/* ===== Footer ===== */
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* height: var(--footer-h); */
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 35px;
+    border-top: 1px solid #e8e8e8;
+    background: #fff;
+    z-index: 10;
+}
+
+.footer .footer-logo img {
+    height: 8dvw;
+}
+
+.footer .country img {
+    height: 13dvw;
+}
+
+.footer .resarch-group img {
+    height: 10dvw;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .gauges-row,
+    .temps-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .performance-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .gauges-row,
+    .temps-row {
+        grid-template-columns: 1fr;
+    }
+}
